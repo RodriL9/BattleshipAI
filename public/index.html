@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Battleship vs GPT-4o</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <canvas id="grid-canvas"></canvas>
+  <div class="scanlines"></div>
+
+  <div id="app">
+
+    <!-- Top bar -->
+    <header class="topbar">
+      <div class="player-id">
+        <span class="player-tag">by //</span>
+        <span class="player-name">Rodrigo Leites-Mena</span>
+      </div>
+      <div class="system-tag">NAVAL COMBAT </div>
+    </header>
+
+    <!-- Title -->
+    <div class="title-block">
+      <div class="title-eyebrow">— NAVAL COMBAT PROTOCOL —</div>
+      <h1 class="main-title">Can you Sink <span class="title-accent">GPT-4o</span>?</h1>
+    </div>
+
+    <!-- Phase: ship placement -->
+    <div id="phase-placement">
+      <div class="phase-label">// PHASE 01 — DEPLOY YOUR FLEET</div>
+      <div class="placement-ui">
+        <div class="ship-select">
+          <div class="section-label">SELECT SHIP</div>
+          <div id="ship-list"></div>
+          <div class="orient-row">
+            <span class="diff-label">ORIENTATION:</span>
+            <button class="diff-btn active" id="btn-h" onclick="setOrientation('H')">HORIZONTAL</button>
+            <button class="diff-btn" id="btn-v" onclick="setOrientation('V')">VERTICAL</button>
+          </div>
+          <button class="btn primary" id="btn-random" onclick="randomPlacement()">⚄ RANDOM PLACEMENT</button>
+          <button class="btn secondary" id="btn-start" onclick="startBattle()" disabled>▶ START BATTLE</button>
+        </div>
+        <div class="grid-section">
+          <div class="grid-label">YOUR WATERS</div>
+          <div class="board-wrap">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div id="placement-grid" class="grid"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase: battle -->
+    <div id="phase-battle" style="display:none">
+      <div class="status-bar" id="status-bar">
+        <span class="status-cursor">▶</span>
+        <span id="status-text">YOUR TURN — FIRE AT THE ENEMY</span>
+      </div>
+
+      <div class="battle-grids">
+        <!-- Player grid -->
+        <div class="grid-section">
+          <div class="grid-label player-label">YOUR FLEET</div>
+          <div class="ships-remaining" id="player-ships-left"></div>
+          <div class="board-wrap">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div id="player-grid" class="grid"></div>
+          </div>
+        </div>
+
+        <!-- AI grid -->
+        <div class="grid-section">
+          <div class="grid-label ai-label">ENEMY WATERS <span class="fire-hint">(CLICK TO FIRE)</span></div>
+          <div class="ships-remaining" id="ai-ships-left"></div>
+          <div class="board-wrap">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div id="ai-grid" class="grid"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="btn primary" onclick="newGame()">↺ NEW GAME</button>
+      </div>
+    </div>
+
+    <div class="footer-tag">OPPONENT: GPT-4o · OPENAI NEURAL NET · TRON EDITION</div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
